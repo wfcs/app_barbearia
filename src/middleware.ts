@@ -1,8 +1,10 @@
 import NextAuth from "next-auth"
-import { auth } from "@/lib/auth"
+import { authConfig } from "@/auth.config"
+
+const { auth } = NextAuth(authConfig)
 
 export default auth((req) => {
-    // Add custom middleware logic here if needed
+    // Custom logic
 })
 
 export const config = {
