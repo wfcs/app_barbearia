@@ -1,90 +1,100 @@
 import Link from "next/link"
-import { ArrowRight, Calendar, CreditCard, Scissors, MapPin } from "lucide-react"
+import { ArrowRight, Calendar, CreditCard, Scissors, MapPin, Star } from "lucide-react"
 
 export default function LandingPage() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen font-sans text-foreground">
       {/* Hero Section */}
-      <section className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
-        <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center">
-          <Link
-            href="/login"
-            className="rounded-2xl bg-muted px-4 py-1.5 text-sm font-medium transition-colors hover:bg-muted/80"
-          >
-            Follow along on Twitter
-          </Link>
-          <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-            The modern standard for{" "}
-            <span className="text-primary">Barber Shops</span>
+      <section className="relative flex flex-col items-center justify-center py-20 lg:py-32 bg-background overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-background to-background" />
+        <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]" /> {/* Texture overlay */}
+        <div className="container relative z-10 flex flex-col items-center gap-6 text-center">
+          <div className="inline-flex items-center rounded-full border border-accent/50 bg-accent/10 px-3 py-1 text-sm font-medium text-accent uppercase tracking-widest backdrop-blur-sm">
+            Est. 2024
+          </div>
+          <h1 className="font-serif text-5xl sm:text-7xl font-bold tracking-tight text-primary">
+            Barbearia <span className="text-foreground">Vintage</span>
           </h1>
-          <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
-            Manage your schedule, handle payments, and grow your business with our all-in-one platform.
-            Robust, fast, and designed for professionals.
+          <p className="max-w-[42rem] font-light text-lg sm:text-xl text-muted-foreground italic">
+            "Cortando cabelos e fazendo amigos. A tradição do verdadeiro cavalheiro."
           </p>
-          <div className="space-x-4">
+          <div className="flex flex-col sm:flex-row gap-4 mt-8">
             <Link
               href="/login"
-              className="inline-flex h-11 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90"
+              className="inline-flex h-12 items-center justify-center rounded-sm bg-primary px-8 text-sm font-semibold text-primary-foreground shadow-lg transition-transform hover:scale-105 active:scale-95 uppercase tracking-wide border-2 border-primary hover:bg-primary/90"
             >
-              Get Started
+              Agendar Horário
             </Link>
             <Link
               href="/shops"
-              className="inline-flex h-11 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
+              className="inline-flex h-12 items-center justify-center rounded-sm border-2 border-accent bg-transparent px-8 text-sm font-semibold text-accent transition-colors hover:bg-accent hover:text-accent-foreground uppercase tracking-wide"
             >
-              Find a Barber
+              Nossas Unidades
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section id="features" className="container space-y-6 bg-slate-50 py-8 dark:bg-transparent md:py-12 lg:py-24 rounded-3xl my-8">
-        <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-          <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl font-bold">
-            Features
+      {/* Services/Features Section */}
+      <section id="features" className="container space-y-12 py-16 md:py-24">
+        <div className="mx-auto flex flex-col items-center space-y-4 text-center">
+          <h2 className="font-serif text-4xl font-bold text-foreground">
+            Nossos Serviços
           </h2>
-          <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-            Everything you need to run your barber shop efficiently.
+          <div className="w-24 h-1 bg-accent rounded-full" />
+          <p className="max-w-[85%] text-muted-foreground sm:text-lg">
+            Experiência completa de barbearia com toalha quente e navalha.
           </p>
         </div>
-        <div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-w-[64rem] md:grid-cols-3">
+        <div className="grid justify-center gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <FeatureCard
-            icon={<Calendar className="h-10 w-10" />}
-            title="Smart Scheduling"
-            description="Manage appointments with ease. Block times, set recurring slots, and avoid double bookings."
+            icon={<Scissors className="h-8 w-8" />}
+            title="Corte Clássico"
+            description="Tesoura e máquina, acabamento impecável."
           />
           <FeatureCard
-            icon={<CreditCard className="h-10 w-10" />}
-            title="Secure Payments"
-            description="Accept payments online or in-person. Integrated with Stripe/Asaas for seamless transactions."
+            icon={<Calendar className="h-8 w-8" />}
+            title="Agendamento"
+            description="Reserve seu horário online, sem filas."
           />
           <FeatureCard
-            icon={<Scissors className="h-10 w-10" />}
-            title="Barber Tools"
-            description="Track your earnings, manage your queue, and build your client portfolio."
+            icon={<Star className="h-8 w-8" />}
+            title="Barba Terapia"
+            description="Hidratação, toalha quente e massagem."
           />
           <FeatureCard
-            icon={<MapPin className="h-10 w-10" />}
-            title="Shop Locator"
-            description="Clients can easily find your shop based on location and services offered."
+            icon={<CreditCard className="h-8 w-8" />}
+            title="Clube de Assinatura"
+            description="Torne-se membro e economize todo mês."
           />
         </div>
       </section>
 
+      {/* Quote Section */}
+      <section className="bg-primary py-16 text-primary-foreground">
+        <div className="container flex flex-col items-center text-center space-y-6">
+          <div className="text-6xl text-accent font-serif opacity-50">"</div>
+          <blockquote className="font-serif text-2xl md:text-4xl italic max-w-4xl">
+            Não é apenas um corte de cabelo, é um ritual. Onde o passado encontra o presente.
+          </blockquote>
+          <cite className="font-sans font-bold tracking-widest uppercase not-italic text-sm text-accent">
+            - Mestre Barbeiro
+          </cite>
+        </div>
+      </section>
     </div>
   )
 }
 
 function FeatureCard({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) {
   return (
-    <div className="relative overflow-hidden rounded-lg border bg-background p-2">
-      <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
-        <div className="space-y-2">
-          <div className="text-primary">{icon}</div>
-          <h3 className="font-bold">{title}</h3>
-          <p className="text-sm text-muted-foreground">{description}</p>
+    <div className="group relative overflow-hidden rounded-lg border border-border bg-card p-6 transition-all hover:border-accent hover:shadow-md">
+      <div className="flex flex-col items-center text-center space-y-4">
+        <div className="rounded-full bg-secondary p-4 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
+          {icon}
         </div>
+        <h3 className="font-serif text-xl font-bold text-foreground">{title}</h3>
+        <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
       </div>
     </div>
   )
