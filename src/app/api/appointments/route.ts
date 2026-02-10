@@ -4,29 +4,34 @@ import { auth } from "@/lib/auth"
 
 export const dynamic = "force-dynamic"
 
-export async function GET(req: Request) {
-    const session = await auth()
-    if (!session?.user) {
-        return new NextResponse("Unauthorized", { status: 401 })
-    }
-
-    // List appointments for user
-    const appointments = await prisma.appointment.findMany({
-        where: {
-            OR: [
-                { clientId: session.user.id },
-                { barberId: session.user.id }
-            ]
-        },
-        include: {
-            service: true,
-            tenant: true,
-            barber: true,
-            client: true
+export async function GET() {
+    try {
+        const session = await auth()
+        if (!session?.user) {
+            return new NextResponse("Unauthorized", { status: 401 })
         }
-    })
 
-    return NextResponse.json(appointments)
+        // List appointments for user
+        const appointments = await prisma.appointment.findMany({
+            where: {
+                OR: [
+                    { clientId: session.user.id },
+                    { barberId: session.user.id }
+                ]
+            },
+            include: {
+                service: true,
+                tenant: true,
+                barber: true,
+                client: true
+            }
+        })
+
+        return NextResponse.json(appointments)
+    } catch (error) {
+        console.error("Failed to fetch appointments:", error)
+        return new NextResponse("Internal Error", { status: 500 })
+    }
 }
 
 export async function POST(req: Request) {

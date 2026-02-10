@@ -5,8 +5,13 @@ import { auth } from "@/lib/auth"
 export const dynamic = "force-dynamic"
 
 export async function GET() {
-    const tenants = await prisma.tenant.findMany()
-    return NextResponse.json(tenants)
+    try {
+        const tenants = await prisma.tenant.findMany()
+        return NextResponse.json(tenants)
+    } catch (error) {
+        console.error("Failed to fetch tenants:", error)
+        return new NextResponse("Internal Error", { status: 500 })
+    }
 }
 
 export async function POST(req: Request) {

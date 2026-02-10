@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sistema de Gestão para Barbearias (SaaS Multi-tenant)
 
-## Getting Started
+Este é um projeto **Next.js 16** focado em gerenciamento de barbearias, utilizando uma arquitetura multi-tenant onde diversas barbearias podem gerenciar seus agendamentos, serviços e profissionais em uma única plataforma.
 
-First, run the development server:
+## 🚀 Tecnologias Utilizadas
+
+O projeto utiliza uma stack moderna e robusta:
+
+- **Frontend**: [Next.js 16](https://nextjs.org/) (App Router), [React 19](https://react.dev/)
+- **Linguagem**: [TypeScript](https://www.typescriptlang.org/)
+- **Estilização**: [Tailwind CSS v4](https://tailwindcss.com/), [Shadcn UI](https://ui.shadcn.com/) (componentes baseados em Radix UI)
+- **Banco de Dados & ORM**: [PostgreSQL](https://www.postgresql.org/), [Prisma](https://www.prisma.io/)
+- **Autenticação**: [NextAuth.js v5](https://authjs.dev/)
+- **Pagamentos**: Integração prevista com [Stripe](https://stripe.com/)
+- **Ícones**: [Lucide React](https://lucide.dev/)
+- **Fontes**: DM Serif Display & DM Sans (Google Fonts)
+
+## ✨ Funcionalidades Principais
+
+- **Multi-tenancy**: Suporte para múltiplas barbearias (tenants) com dados isolados.
+- **Agendamento Online**: Clientes podem agendar horários com base na disponibilidade dos barbeiros.
+- **Gestão de Serviços**: Cadastro de serviços com preços e duração.
+- **Gestão de Equipe**: Cadastro de barbeiros e definição de horários de trabalho.
+- **Painel Administrativo**: Dashboard para gestão do negócio.
+- **Autenticação Segura**: Login social e por credenciais.
+
+## 📂 Estrutura do Projeto
+
+A estrutura de pastas segue o padrão do Next.js App Router:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+src/
+├── app/
+│   ├── (auth)/          # Rotas de autenticação (login, register)
+│   ├── (dashboard)/     # Painel administrativo (protegido)
+│   ├── (marketing)/     # Landing page e páginas públicas
+│   ├── api/             # Rotas de API (Next.js API Handler)
+│   └── shops/           # Rotas dinâmicas para as barbearias
+├── components/          # Componentes Reutilizáveis (UI)
+├── lib/                 # Utilitários e configurações (prisma, utils)
+└── ...
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Configuração e Instalação
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Pré-requisitos
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Node.js (versão 20 ou superior recomendada)
+- PostgreSQL (local ou hospedado, ex: Supabase, Neon)
 
-## Learn More
+### Passo a Passo
 
-To learn more about Next.js, take a look at the following resources:
+1. **Clone o repositório:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   git clone https://github.com/seu-usuario/barbearia-app.git
+   cd barbearia-app
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Instale as dependências:**
 
-## Deploy on Vercel
+   ```bash
+   npm install
+   # ou
+   yarn install
+   # ou
+   pnpm install
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **Configure as Variáveis de Ambiente:**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   Crie um arquivo `.env` na raiz do projeto baseando-se no `.env.example` (se existir) ou adicione as chaves necessárias:
+
+   ```env
+   DATABASE_URL="postgresql://user:password@localhost:5432/barbearia?schema=public"
+   AUTH_SECRET="sua_chave_secreta_aqui" # Gere com: npx auth secret
+   # Adicione outras chaves conforme necessário (Stripe, Google Auth, etc.)
+   ```
+
+4. **Configure o Banco de Dados:**
+
+   Execute as migrações do Prisma para criar as tabelas no banco de dados:
+
+   ```bash
+   npx prisma migrate dev --name init
+   ```
+
+5. **Inicie o Servidor de Desenvolvimento:**
+
+   ```bash
+   npm run dev
+   ```
+
+   O projeto estará rodando em [http://localhost:3000](http://localhost:3000).
+
+## 🤝 Contribuição
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT.

@@ -5,17 +5,22 @@ import { auth } from "@/lib/auth"
 export const dynamic = "force-dynamic"
 
 export async function GET(req: Request) {
-    const { searchParams } = new URL(req.url)
-    const tenantId = searchParams.get("tenantId")
+    try {
+        const { searchParams } = new URL(req.url)
+        const tenantId = searchParams.get("tenantId")
 
-    if (!tenantId) {
-        return new NextResponse("Tenant ID required", { status: 400 })
+        if (!tenantId) {
+            return new NextResponse("Tenant ID required", { status: 400 })
+        }
+
+        const services = await prisma.service.findMany({
+            where: { tenantId }
+        })
+        return NextResponse.json(services)
+    } catch (error) {
+        console.error("Failed to fetch services:", error)
+        return new NextResponse("Internal Error", { status: 500 })
     }
-
-    const services = await prisma.service.findMany({
-        where: { tenantId }
-    })
-    return NextResponse.json(services)
 }
 
 export async function POST(req: Request) {
